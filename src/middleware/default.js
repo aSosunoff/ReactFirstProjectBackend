@@ -27,7 +27,7 @@ module.exports = (app, module) => {
 	app
 		.use(
 			cors({
-				origin: "http://localhost:3001",
+				origin: "http://localhost:3000",
 				methods: "GET,PUT,POST,DELETE",
 				credentials: true,
 			})
