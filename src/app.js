@@ -3,6 +3,9 @@ const server = require("http").createServer(app);
 const config = require("./config/");
 const logger = require('./libs/logger')(module);
 
+require('./middleware/default')(app, module);
+require('./middleware/error')(app);
+
 app.use('/', (req, res) => {
 	res.send('<a href="http://localhost:3001/">Войти на сайт</a>');
 });
