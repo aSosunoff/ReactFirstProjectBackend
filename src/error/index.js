@@ -14,7 +14,7 @@ class HttpError extends Error {
 	}
 }
 
-class AuthError extends Error {
+/* class AuthError extends Error {
 	constructor(message) {
 		super(message || http.STATUS_CODES[status] || "Error");
 		Error.captureStackTrace(this, AuthError);
@@ -25,14 +25,14 @@ class AuthError extends Error {
 	toString() {
 		return this.message;
 	}
-}
+} */
 
-class CategoryError extends Error {
+class QuizError extends Error {
 	constructor(message) {
 		super(message || http.STATUS_CODES[status] || "Error");
 		Error.captureStackTrace(this, AuthError);
 
-		this.name = "CategoryError";
+		this.name = "QuizError";
 	}
 
 	toString() {
@@ -40,7 +40,7 @@ class CategoryError extends Error {
 	}
 }
 
-class RecordError extends Error {
+/* class RecordError extends Error {
 	constructor(message) {
 		super(message || http.STATUS_CODES[status] || "Error");
 		Error.captureStackTrace(this, AuthError);
@@ -51,12 +51,12 @@ class RecordError extends Error {
 	toString() {
 		return this.message;
 	}
-}
+} */
 
-module.exports.RecordError = RecordError;
+/* module.exports.RecordError = RecordError; */
 
-module.exports.CategoryError = CategoryError;
+module.exports.QuizError = QuizError;
 
-module.exports.AuthError = AuthError;
+/* module.exports.AuthError = AuthError; */
 
 module.exports.HttpError = HttpError;

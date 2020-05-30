@@ -4,6 +4,7 @@ const config = require("./config/");
 const logger = require('./libs/logger')(module);
 
 require('./middleware/default')(app, module);
+require('./routes')(app);
 require('./middleware/error')(app);
 
 app.use('/', (req, res) => {

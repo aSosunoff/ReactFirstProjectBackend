@@ -5,6 +5,7 @@ const bodyParser = require("body-parser");
 const cors = require("cors");
 const coocieParserMiddleware = require("cookie-parser");
 const expressSession = require("express-session");
+const sessionStore = require('../libs/sessionStore');
 
 const config = require("../config");
 const skip = (req, res) => res.statusCode < config.get("morgan:statusCode");
@@ -34,7 +35,7 @@ module.exports = (app, module) => {
 		.use(bodyParser.json()) // req.body parse application/json
 		.use(bodyParser.urlencoded({ extended: false })) // req.body parse application/x-www-form-urlencoded
 		.use(coocieParserMiddleware()) // req.cookies
-		/* .use(
+		.use(
 			expressSession({
 				secret: config.get("session:secret"),
 				key: config.get("session:key"),
@@ -43,7 +44,7 @@ module.exports = (app, module) => {
 				resave: true,
 				saveUninitialized: true,
 			})
-		) */
+		)
 		.use(express.static(path.join(rootDirName, "public")))
 		.use(require("./sendHttpError"))
 		.use(require("./loadUserFromSession"));
