@@ -1,12 +1,12 @@
 const mongoose = require("../libs/mongoose");
 const { QuizError } = require("../error");
 
-var Answer = new mongoose.Schema({
+const Answer = new mongoose.Schema({
 	text: String,
 	value: Number,
 });
 
-const quizSchema = new mongoose.Schema({
+const quizItem = new mongoose.Schema({
 	question: {
 		type: String,
 		required: true,
@@ -17,23 +17,21 @@ const quizSchema = new mongoose.Schema({
 		required: true,
 	},
 	answers: [Answer],
+});
+
+const quizSchema = new mongoose.Schema({
+	quizes: [quizItem],
 	created: {
 		type: Date,
 		default: Date.now,
 	},
 });
 
-quizSchema.statics.createNew = async function ({
-	question,
-	rightAnswerId,
-	answers,
-}) {
+quizSchema.statics.createNew = async function (quizes) {
 	const QuizModel = this;
 
 	const quiz = new QuizModel({
-		question,
-		rightAnswerId,
-		answers,
+		quizes,
 	});
 
 	await quiz.save();

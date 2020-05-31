@@ -13,18 +13,14 @@ const mapRecordQuiz = mapRecord((rec) => ({
 	answers: rec.answers.map(mapRecordAnswer),
 	created: rec.created,
 }));
+const mapRecordQuizes = mapRecord((rec) => ({
+	_id: rec._id,
+	quizes: rec.quizes.map(mapRecordQuiz),
+}));
 
 exports.postCreate = async (req, res, next) => {
 	try {
-		await Promise.all(
-			req.body.quiz.map((quiz) =>
-				QuizModel.createNew({
-					question: quiz.question,
-					rightAnswerId: quiz.rightAnswerId,
-					answers: quiz.answers,
-				})
-			)
-		);
+		await QuizModel.createNew(req.body.quizes);
 
 		res.sendStatus(200);
 	} catch (e) {
@@ -39,7 +35,7 @@ exports.postCreate = async (req, res, next) => {
 exports.getList = async (req, res, next) => {
 	try {
 		const quizes = await QuizModel.getList();
-		res.send(quizes.map(mapRecordQuiz));
+		res.send(quizes.map(mapRecordQuizes));
 	} catch (e) {
 		return next(e);
 	}
@@ -48,7 +44,7 @@ exports.getList = async (req, res, next) => {
 exports.getItem = async (req, res, next) => {
 	try {
 		const quiz = await QuizModel.getItem(req.params.id);
-		res.send(mapRecordQuiz(quiz));
+		res.send(mapRecordQuizes(quiz));
 	} catch (e) {
 		return next(e);
 	}
