@@ -41,5 +41,12 @@ quizSchema.statics.createNew = async function ({
 	return quiz;
 };
 
+quizSchema.statics.getList = async function () {
+	return await this.find();
+};
 
-module.exports = mongoose.model('Quiz', quizSchema);
+quizSchema.statics.getItem = async function (_id) {
+	return await this.findById(_id);
+};
+
+module.exports = mongoose.model("Quiz", quizSchema);
