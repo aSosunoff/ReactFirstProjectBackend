@@ -40,21 +40,6 @@ class QuizError extends Error {
 	}
 }
 
-/* class RecordError extends Error {
-	constructor(message) {
-		super(message || http.STATUS_CODES[status] || "Error");
-		Error.captureStackTrace(this, AuthError);
-
-		this.name = "RecordError";
-	}
-
-	toString() {
-		return this.message;
-	}
-} */
-
-/* module.exports.RecordError = RecordError; */
-
 module.exports.QuizError = QuizError;
 
 /* module.exports.AuthError = AuthError; */
