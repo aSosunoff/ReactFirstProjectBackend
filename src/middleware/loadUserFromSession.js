@@ -1,10 +1,9 @@
 const { HttpError } = require('../error');
-/* const UserModel = require('../../models/user'); */
+const UserModel = require('../models/user');
 const logger = require('../libs/logger')(module);
 
 module.exports = async (req, res, next) => {
-	return next();
-	/* req.user = res.locals.user = null;
+	req.user = res.locals.user = null;
 
 	if (!req.session.user) {
 		return next();
@@ -21,5 +20,5 @@ module.exports = async (req, res, next) => {
 	} catch (e) {
 		logger.error(e);
 		return next(new HttpError(404, 'Пользователь не найден'));
-	} */
+	}
 };

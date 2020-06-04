@@ -14,7 +14,7 @@ class HttpError extends Error {
 	}
 }
 
-/* class AuthError extends Error {
+class AuthError extends Error {
 	constructor(message) {
 		super(message || http.STATUS_CODES[status] || "Error");
 		Error.captureStackTrace(this, AuthError);
@@ -25,7 +25,7 @@ class HttpError extends Error {
 	toString() {
 		return this.message;
 	}
-} */
+}
 
 class QuizError extends Error {
 	constructor(message) {
@@ -42,6 +42,6 @@ class QuizError extends Error {
 
 module.exports.QuizError = QuizError;
 
-/* module.exports.AuthError = AuthError; */
+module.exports.AuthError = AuthError;
 
 module.exports.HttpError = HttpError;
