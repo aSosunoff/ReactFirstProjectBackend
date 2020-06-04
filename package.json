@@ -4,7 +4,7 @@
 	"description": "",
 	"main": "index.js",
 	"scripts": {
-		"serve": "SET NODE_ENV=development&& nodemon src/app.js"
+		"start": "SET NODE_ENV=development&& nodemon src/app.js"
 	},
 	"keywords": [],
 	"author": "",
