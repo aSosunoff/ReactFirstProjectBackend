@@ -32,6 +32,20 @@ exports.postCreate = async (req, res, next) => {
 	}
 };
 
+exports.deleteById = async (req, res, next) => {
+	try {
+		await QuizModel.deleteById(req.body.id);
+
+		res.sendStatus(200);
+	} catch (e) {
+		if (e instanceof QuizError) {
+			return next(new HttpError(403, e.message));
+		} else {
+			return next(e);
+		}
+	}
+};
+
 exports.getList = async (req, res, next) => {
 	try {
 		const quizes = await QuizModel.getList();

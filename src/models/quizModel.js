@@ -39,6 +39,10 @@ quizSchema.statics.createNew = async function (quizes) {
 	return quiz;
 };
 
+quizSchema.statics.deleteById = async function (id) {
+	await this.findByIdAndRemove(id);
+};
+
 quizSchema.statics.getList = async function () {
 	return await this.find();
 };
