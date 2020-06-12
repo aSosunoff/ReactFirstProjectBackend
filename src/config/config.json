@@ -16,7 +16,7 @@
 		"cookie": {
 			"path": "/",
 			"httpOnly": true,
-			"maxAge": null
+			"maxAge": 60000
 		}
 	},
 	"logger": {
