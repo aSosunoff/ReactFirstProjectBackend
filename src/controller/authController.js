@@ -1,6 +1,6 @@
-const { HttpError , AuthError } = require('../error');
-const UserModel = require('../models/user');
-const logger = require('../libs/logger')(module);
+const { HttpError, AuthError } = require("../error");
+const UserModel = require("../models/user");
+const logger = require("../libs/logger")(module);
 
 exports.postLogin = async (req, res, next) => {
 	try {
@@ -11,7 +11,10 @@ exports.postLogin = async (req, res, next) => {
 
 		req.session.user = user._id;
 
-		res.end();
+		res.send({
+			expires: req.session.cookie.expires,
+			originalMaxAge: req.session.cookie.originalMaxAge,
+		});
 	} catch (e) {
 		if (e instanceof AuthError) {
 			return next(new HttpError(403, e.message));
@@ -31,7 +34,10 @@ exports.postRegister = async (req, res, next) => {
 
 		req.session.user = user._id;
 
-		res.end();
+		res.send({
+			expires: req.session.cookie.expires,
+			originalMaxAge: req.session.cookie.originalMaxAge,
+		});
 	} catch (e) {
 		if (e instanceof AuthError) {
 			return next(new HttpError(401, e.message));
@@ -44,15 +50,15 @@ exports.postRegister = async (req, res, next) => {
 exports.postLogout = (req, res, next) => {
 	const sid = req.session.id;
 
-	const io = req.app.get('io');
+	const io = req.app.get("io");
 
-	req.session.destroy(err => {
+	req.session.destroy((err) => {
 		/* io.sockets._events['session:reload'](sid); */
 
 		if (err) {
 			return next(err);
 		}
-
+		
 		res.end();
 	});
 };
